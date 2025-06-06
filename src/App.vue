@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <!-- Navigation/Header -->
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="container">
+        <span class="navbar-brand h1">🧱 LEGO Brick System</span>
+        <small class="text-light">Business Analyst Service Mapper</small>
+      </div>
+    </nav>
+    
+    <!-- Add new brick form -->
+    <BrickForm @brick-created="refreshBrickList" />
+    
+    <!-- Divider -->
+    <hr class="my-5">
+    
+    <!-- Show all bricks -->
+    <BrickList ref="brickList" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BrickForm from './components/BrickForm.vue'
+import BrickList from './components/BrickList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BrickForm,
+    BrickList
+  },
+  methods: {
+    refreshBrickList() {
+      // When a new brick is created, refresh the list
+      this.$refs.brickList.fetchBricks()
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  background-color: #f8f9fa;
 }
 </style>
