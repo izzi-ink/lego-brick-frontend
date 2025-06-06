@@ -1,11 +1,8 @@
 <template>
-  <div class="container mt-4">
+  <div class="form-container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">
-            <h3>Add New LEGO Brick</h3>
-          </div>
+      <div class="col-xl-10">
+        <div class="card form-card">
           <div class="card-body">
             
             <!-- Success message -->
@@ -115,14 +112,29 @@
               </div>
               
               <!-- Submit Button -->
-              <div class="d-grid gap-2">
-                <button 
-                  type="submit" 
-                  class="btn btn-primary btn-lg"
-                  :disabled="submitting"
-                >
-                  {{ submitting ? 'Creating Brick...' : 'Create Brick' }}
-                </button>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-md-6">
+                    <button 
+                      type="button" 
+                      class="btn btn-outline-secondary btn-lg w-100"
+                      @click="resetForm"
+                      :disabled="submitting"
+                    >
+                      Reset Form
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button 
+                      type="submit" 
+                      class="btn btn-primary btn-lg w-100"
+                      :disabled="submitting"
+                    >
+                      <span v-if="submitting" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                      {{ submitting ? 'Creating Brick...' : 'Create Brick' }}
+                    </button>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -194,3 +206,122 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.form-container {
+  max-width: 100%;
+}
+
+.form-card {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 16px;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.alert {
+  border-radius: 12px;
+  border: none;
+  padding: 1rem 1.5rem;
+}
+
+.alert-success {
+  background-color: #d1edff;
+  color: #0c5460;
+  border-left: 4px solid #0dcaf0;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0.875rem 1.5rem;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);
+  border-color: #0d6efd;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover:not(:disabled) {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+.form-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Enhanced form layout */
+.row.mb-3 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Input focus animations */
+.form-control:focus {
+  transform: scale(1.01);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 767.98px) {
+  .form-actions .row .col-md-6 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-actions .row .col-md-6:last-child {
+    margin-bottom: 0;
+  }
+}
+</style>
